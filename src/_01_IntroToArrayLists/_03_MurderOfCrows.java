@@ -18,7 +18,8 @@ import javax.swing.JOptionPane;
 public class _03_MurderOfCrows {
 
     ArrayList<Crow> theMurder = new ArrayList<Crow>();
-
+    int deadCrows = 0;
+    String guiltyCrow = null;
     public static void main(String[] args) {
         _03_MurderOfCrows murderOfCrows = new _03_MurderOfCrows();
         murderOfCrows.initializeCrows();
@@ -30,9 +31,21 @@ public class _03_MurderOfCrows {
          * 1. One of the Crows has eaten the diamond. You need to search through the stomach of each Crow, 
          * then print the name of the guilty Crow.
          */
-        
+        for(int i = 0; i < theMurder.size(); i++ ) {
+        	for(int n = 0; n < theMurder.get(i).getStomachContents().size(); n++ ) {
+        		if(theMurder.get(i).getStomachContents().get(n).equalsIgnoreCase("diamond")) {
+        			guiltyCrow = theMurder.get(i).getName();
+        			System.out.println(theMurder.get(i).getName());
+        			break;
+        		}
+        	}
+        	if(guiltyCrow!=null) {
+        		break;
+        	}
+        	deadCrows+=1;
+        }
         /* 2. How many innocent crows had to die before the diamond was found? */
-    	
+    	System.out.println(deadCrows + " innocent crows had to die before the diamond was found. " + "\n" + "You did this, " + guiltyCrow);
     }
 
     private void initializeCrows() {
