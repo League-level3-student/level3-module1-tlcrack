@@ -1,8 +1,72 @@
 package _06_Intro_To_Hash_Maps;
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class _02_LogSearch {
-  /* 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class _02_LogSearch implements ActionListener {
+	JFrame fra = new JFrame();
+	JPanel pan = new JPanel();
+	JButton addEntry = new JButton();
+	JButton searchID = new JButton();
+	JButton viewList = new JButton();
+	JButton removeEntry = new JButton();
+	HashMap<Integer, String> logSearch = new HashMap<Integer, String>();
+	
+	
+	void GUI() {
+		fra.add(pan);
+		pan.add(addEntry);
+		pan.add(searchID);
+		pan.add(viewList);
+		pan.add(removeEntry);
+		
+		fra.setVisible(true);
+		fra.setPreferredSize(new Dimension(300, 100));
+		fra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addEntry.setText("Add entry");
+		searchID.setText("Search by ID");
+		viewList.setText("View List");
+		removeEntry.setText("Remove entry");
+		addEntry.addActionListener(this);
+		searchID.addActionListener(this);
+		viewList.addActionListener(this);
+		removeEntry.addActionListener(this);
+		fra.pack();
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource().equals(addEntry)) {
+			String ID = JOptionPane.showInputDialog("Enter an ID number.");
+			String name = JOptionPane.showInputDialog("Enter a name.");
+			int IDnumber = Integer.parseInt(ID);
+			logSearch.put(IDnumber, name);
+		}
+		else if(e.getSource().equals(searchID)) {
+			String existingID = JOptionPane.showInputDialog("Enter an existing ID number.");
+			int existingIDnumber = Integer.parseInt(existingID);
+		}
+		else if(e.getSource().equals(viewList)) {
+			
+		}
+		else if(e.getSource().equals(removeEntry)) {
+			
+		}
+	}
+	
+	
+	
+	/* 
+   		
 	 * Crate a HashMap of Integers for the keys and Strings for the values.
 	 * Create a GUI with three buttons. 
 	 * Button 1: Add Entry
