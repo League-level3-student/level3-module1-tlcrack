@@ -18,6 +18,8 @@ public class _02_LogSearch implements ActionListener {
 	JButton viewList = new JButton();
 	JButton removeEntry = new JButton();
 	HashMap<Integer, String> logSearch = new HashMap<Integer, String>();
+	String existingID;
+	int existingIDnumber;
 	
 	
 	void GUI() {
@@ -45,21 +47,41 @@ public class _02_LogSearch implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		
 		if(e.getSource().equals(addEntry)) {
+			
 			String ID = JOptionPane.showInputDialog("Enter an ID number.");
 			String name = JOptionPane.showInputDialog("Enter a name.");
 			int IDnumber = Integer.parseInt(ID);
 			logSearch.put(IDnumber, name);
 		}
 		else if(e.getSource().equals(searchID)) {
-			String existingID = JOptionPane.showInputDialog("Enter an existing ID number.");
-			int existingIDnumber = Integer.parseInt(existingID);
+			existingID = JOptionPane.showInputDialog("Enter an exising ID number.");
+			existingIDnumber = Integer.parseInt(existingID);
+			if(logSearch.get(existingIDnumber) != null) {
+				JOptionPane.showMessageDialog(null, logSearch.get(existingIDnumber));
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "That value does not exist.");
+			}
 		}
 		else if(e.getSource().equals(viewList)) {
-			
+			String printNames = "";
+			for(Integer key : logSearch.keySet()) {
+				printNames += "ID: " + key + "  Name: " + logSearch.get(key) + "\n";
+			}
+			JOptionPane.showMessageDialog(null, printNames);
 		}
 		else if(e.getSource().equals(removeEntry)) {
-			
+			String removalID = JOptionPane.showInputDialog("Type the ID the the person you would like to be removed.");
+			int IDtoRemove = Integer.parseInt(removalID);
+			if(logSearch.get(IDtoRemove) != null) {
+				JOptionPane.showMessageDialog(null, logSearch.get(IDtoRemove) + " has been removed.");
+				logSearch.remove(IDtoRemove);
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "That value does not exist.");
+			}
 		}
 	}
 	
